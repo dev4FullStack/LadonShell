@@ -1,0 +1,15 @@
+{
+  "name": "ladon",
+  "version": "1.0.0",
+  "description": "Outil de gestion de commande du shell",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ".git"
+  },
+  "author": "Payet Harold",
+  "license": "ISC"
+}
