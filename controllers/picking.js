@@ -30,8 +30,8 @@ for(let d = 0; d < json['data'].length; d++){
         break;
       case 2:
         td.innerHTML =
-        "<input type='input' placeholder="+
-        data.parameters+" >";
+        "<input type='input'" +`class="checkParams" placeholder="${
+        data.parameters}"`+" >";
         break;
       case 3:
         td.dataset.id = data.id;

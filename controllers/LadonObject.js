@@ -1,7 +1,17 @@
+const uuid = require('uuid');
+
 function LadonData(data=null){
   this.ladonData = data;
   this.ld = this.ladonData;
-
+  this.reliquat = {
+    "selected": false,
+    "script_name":"nom du script",
+    "parameters":"parametre du script",
+    "admin":false,
+    "continue":false,
+    "status":"warning",
+    "id":uuid.v1()
+  };
   this.getDataById = (id) => {
     for(let i = 0; i < this.ld['data'].length; i++){
       if(this.ld['data'][i].id == id){
@@ -10,7 +20,8 @@ function LadonData(data=null){
     }
     return -404;
   }
-  this.checkerUpdate = (i, action) => {
+  this.checkerUpdate = (id, action) => {
+    let i = this.getDataById(id);
     switch (action) {
       case 'selected':
         this.ld['data'][i].selected = (this.ld['data'][i].selected) ? false : true;
@@ -23,6 +34,13 @@ function LadonData(data=null){
         break;
       default:
         break;
+    }
+  }
+  this.add = (data) => {
+    if(this.ld != null){
+      
+    }else {
+
     }
   }
 }
