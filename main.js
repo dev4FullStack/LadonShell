@@ -1,11 +1,12 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const ipc = electron.ipcMain;
 
 let mainWindow;
 
 let createWindow = () => {
-  mainWindow = BrowserWindow({width: 640, height: 480});
+  mainWindow = new BrowserWindow({width: 640, height: 480});
   mainWindow.loadURL(`file://${__dirname}/views/ladon_template.htm`);
   mainWindow.on('closed', () => {
     mainWindow = null;
@@ -20,3 +21,7 @@ app.on('widow-all-closed', () => {
 app.on('activate', () => {
   if (mainWindow === null) createWindow();
 })
+
+ipc.on('action_run', (event, argv) => {
+  //console.log('Action Run ', argv.ld);
+});

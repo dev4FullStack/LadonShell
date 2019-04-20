@@ -1,0 +1,31 @@
+{
+"data" : [{
+  "selected" : true,
+  "script_name": "echo",
+  "parameters": "Hello World",
+  "admin": false,
+  "continue": false,
+  "status": "warning",
+  "id": "azerty"
+},
+{
+  "selected" : true,
+  "script_name": "ls",
+  "parameters": " ",
+  "admin": true,
+  "continue": false,
+  "status": "correct",
+  "id": "qwerty"
+},
+{
+  "selected" : false,
+  "script_name": "nod",
+  "parameters": " -v",
+  "admin": true,
+  "continue": false,
+  "status": "correct",
+  "id": "uioeax"
+}
+]
+
+}
