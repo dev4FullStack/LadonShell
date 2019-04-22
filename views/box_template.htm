@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <title>Ajouter un script</title>
+</head>
+<style>
+  body {
+    background-color: #535c68;
+    color: #dfe4ea;
+  }
+</style>
+<body>
+
+  <div  class="container-fluid">
+    <div class="row align-items-start">
+      <div class="col">
+        <br>
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <div class="row align-items-center">
+    <div class="col-sm">
+    </div>
+    <div class="col-sm">
+      <label>Entrez nom du script  <input type="text" id="script_input"></label>
+      <br />
+      <label>Entrez les parametres <input type="text" id="parameters_input"></label>
+      <br />
+      <label>Status du script
+        <select id="choice_stat">
+          <option value="basic" class="option-box" id="400">Normal</option>
+          <option value="confirmed" class="option-box" selected id="401">Confirmé</option>
+          <option value="warning" class="option-box" id="402">Expert</option>
+          <option value="kill" class="option-box" id="403">Dangeureux</option>
+        </select>
+      </label>
+    <div class="col align-self-center">
+      <button id="box_cancelled" class="btn btn-danger">Annulez</button>
+      <button id="box_approuved" class="btn btn-success">Validez</button>
+    </div>
+    </div>
+
+    <div class="col-sm">
+
+    </div>
+    </div>
+
+    <div class="row align-items-end">
+      <div class="col">
+
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../controllers/BoxControllers.js"></script>
+</body>
+</html>

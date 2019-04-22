@@ -2,8 +2,11 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const ipc = electron.ipcMain;
-
+const lad = require("./controllers/LadonObject");
+const nodeConsole = require('console');
+const myConsole = new nodeConsole.Console(process.stdout, process.stderr);
 let mainWindow;
+global.ld = null;
 
 let createWindow = () => {
   mainWindow = new BrowserWindow({width: 640, height: 480});
@@ -23,5 +26,32 @@ app.on('activate', () => {
 })
 
 ipc.on('action_run', (event, argv) => {
-  //console.log('Action Run ', argv.ld);
+  console.log('Action Run ', argv.ld);
+});
+
+ipc.on('new_script',(event, argv) => {
+
+  //probleme de passations de variables
+  global.ld = new lad(argv).ld;
+//  let dialogWindow ;
+
+
+  let createDialog = () => {
+    global.dialogWindow = new BrowserWindow({width: 640, height: 480});
+    global.dialogWindow.loadURL(`file://${__dirname}/views/box_template.htm`);
+
+  }
+  createDialog();
+  
+  global.dialogWindow.on('closed' ,() => {
+    global.dialogWindow = null;
+  });
+
+});
+
+ipc.on('box_response', (event, argv) => {
+  myConsole.log(argv);
+});
+ipc.on('box_stop', () => {
+  global.dialogWindow.destroy();
 });

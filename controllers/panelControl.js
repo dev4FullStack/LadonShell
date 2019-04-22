@@ -34,7 +34,6 @@ action_run.addEventListener('click', () => {
 
   for(let i=0; i < window.ladonData.ld['data'].length; i++){
     let ld = window.ladonData.ld['data'][i];
-    myConsole.log(`#${window.ladonData.reliquat.id}#`);
     if(!(chk_p[i].value === "")){
       ld.parameters = chk_p[i].value;
       fs.writeFile('data.json',JSON.stringify(window.ladonData.ld), (err) => {
@@ -51,6 +50,7 @@ action_run.addEventListener('click', () => {
           myConsole.log(stdout);
           myConsole.log(stderr);
           */
+          myConsole.log(`#${window.ladonData.reliquat.id}#${i}`);
           const cnsle = document.getElementsByClassName('console');
           if(stdout)
           cnsle[0].innerHTML = cnsle[0].innerHTML + `<br /> ${stdout} <br />`;
@@ -65,5 +65,11 @@ action_run.addEventListener('click', () => {
     cnsle[0].innerHTML = cnsle[0].innerHTML + `<br /> ${sdout} <br />`;
 
   }/*puts);*/
+
+});
+
+const new_script = document.getElementById('action_newScript');
+new_script.addEventListener('click', () => {
+  ipc.send('new_script', JSON.stringify(window.swp_lad)/*donnée a envoyer*/);
 
 });

@@ -4,7 +4,7 @@ const lad = require(".././controllers/LadonObject");
 let content = fs.
 readFileSync("data.json");
 
-let swp = JSON.parse(content);
+const swp = JSON.parse(content);
 const clip = document.
 getElementById('clipboard');
 
@@ -59,6 +59,7 @@ for(let d = 0; d < json['data'].length; d++){
 }
 
 window.ladonData = new lad(swp);
+window.swp_lad = swp;
 addClip(clip,swp);
 
 //console.log(swp["data"].length);
