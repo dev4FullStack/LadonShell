@@ -42,7 +42,7 @@ ipc.on('new_script',(event, argv) => {
 
   }
   createDialog();
-  
+
   global.dialogWindow.on('closed' ,() => {
     global.dialogWindow = null;
   });
@@ -50,7 +50,10 @@ ipc.on('new_script',(event, argv) => {
 });
 
 ipc.on('box_response', (event, argv) => {
-  myConsole.log(argv);
+  if(global.dialogWindow) global.dialogWindow.destroy();
+  
+  mainWindow.loadURL(`file://${__dirname}/views/ladon_template.htm`);
+  //createWindow();
 });
 ipc.on('box_stop', () => {
   global.dialogWindow.destroy();

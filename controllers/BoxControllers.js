@@ -31,8 +31,10 @@ box_approuved.addEventListener('click', () => {
   lado.status = selected();
 
   ld['data'][ld['data'].length] = lado;
-  fs.writeFile('data.json', JSON.stringify(ld));
-  
+  fs.writeFile('data.json',JSON.stringify(ld), (err) => {
+    if(err)myConsole.log("Erreur d'ecriture data.json ["+err+"]");
+  });
+
 });
 
 box_cancelled.addEventListener('click', () => {

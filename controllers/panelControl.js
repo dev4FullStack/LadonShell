@@ -73,3 +73,22 @@ new_script.addEventListener('click', () => {
   ipc.send('new_script', JSON.stringify(window.swp_lad)/*donnée a envoyer*/);
 
 });
+
+const reset_script = document.getElementById('action_reset');
+let new_ld;
+reset_script.addEventListener('click', () => {
+  for(let i=0; i < window.ladonData.ld['data'].length; i++){
+    let ld = window.ladonData.ld['data'][i];
+    if (ld.selected) {
+      new_ld = window.ladonData.ld['data'].splice(i,1);
+      myConsole.log(window.ladonData.ld['data']);
+    }
+    //myConsole.log(ld.script_name +" : "+ld.selected);
+  }
+  fs.writeFile('data.json',JSON.stringify(window.ladonData.ld), (err) => {
+
+    if(err)myConsole.log("Erreur d'ecriture data.json ["+err+"]");
+  });
+  ipc.send('box_response', window.ladonData.ld);
+  //myConsole.log(window.ladonData.ld['data']);
+});
