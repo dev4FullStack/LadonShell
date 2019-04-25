@@ -50,8 +50,8 @@ ipc.on('new_script',(event, argv) => {
 });
 
 ipc.on('box_response', (event, argv) => {
-  if(global.dialogWindow) global.dialogWindow.destroy();
-  
+  if(global.dialogWindow && global.dialogWindow.destroy() !== undefined) global.dialogWindow.destroy();
+
   mainWindow.loadURL(`file://${__dirname}/views/ladon_template.htm`);
   //createWindow();
 });

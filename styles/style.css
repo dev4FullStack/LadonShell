@@ -39,7 +39,19 @@ body{
   background-color: #2ecc71;
   color: #1e272e;
   overflow: scroll;
+
+  bottom: 0px;
 }
 li:hover {
   background-color: #27ae60;
+}
+.icon_menu {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+#clipboard {
+  width: 100%;
+  border-style: dashed;
+
 }

@@ -44,7 +44,8 @@ action_run.addEventListener('click', () => {
       //myConsole.log(chk_p[i].placeholder);
     }else{
     }
-    if(ld.selected) exec(ld.script_name + " " +ld.parameters,
+    let isRestricted = !(ld.admin) ? "./pwd.sh && " : ""; 
+    if(ld.selected) exec(isRestricted+ld.script_name + " " +ld.parameters,
         (error, stdout, stderr) => {
           /*
           myConsole.log(stdout);
@@ -52,10 +53,13 @@ action_run.addEventListener('click', () => {
           */
           myConsole.log(`#${window.ladonData.reliquat.id}#${i}`);
           const cnsle = document.getElementsByClassName('console');
-          if(stdout)
+          if(stdout){
           cnsle[0].innerHTML = cnsle[0].innerHTML + `<br /> ${stdout} <br />`;
-          if(stderr)
+          }
+          if(stderr){
           cnsle[0].innerHTML = cnsle[0].innerHTML + `<br /> ${stderr} <br />`;
+          }
+          cnsle[0].scrollTop = cnsle[0].scrollHeight;
         });
 
   }
@@ -77,14 +81,21 @@ new_script.addEventListener('click', () => {
 const reset_script = document.getElementById('action_reset');
 let new_ld;
 reset_script.addEventListener('click', () => {
-  for(let i=0; i < window.ladonData.ld['data'].length; i++){
-    let ld = window.ladonData.ld['data'][i];
-    if (ld.selected) {
-      new_ld = window.ladonData.ld['data'].splice(i,1);
-      myConsole.log(window.ladonData.ld['data']);
+  let swp_ = () => {
+    for(let i=0; i < window.ladonData.ld['data'].length; i++){
+      let ld = window.ladonData.ld['data'][i];
+      if (ld.selected) {
+        new_ld = window.ladonData.ld['data'].splice(i,1);
+        swp_();
+      }
+      //myConsole.log(ld.script_name +" : "+ld.selected);
     }
-    //myConsole.log(ld.script_name +" : "+ld.selected);
+
   }
+
+  swp_();
+
+
   fs.writeFile('data.json',JSON.stringify(window.ladonData.ld), (err) => {
 
     if(err)myConsole.log("Erreur d'ecriture data.json ["+err+"]");
