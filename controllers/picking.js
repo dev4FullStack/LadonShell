@@ -44,8 +44,25 @@ for(let d = 0; d < json['data'].length; d++){
         "<input "+ `data-action='continue' `+`data-id='${data.id}'` + " class='checkEvent' type='checkbox' " + (data.continue ? "checked" : "") +" >";
         break;
       case 5:
-        td.innerHTML =
-        data.status;
+        switch(data.status){
+          case 'confirmed':
+            td.innerHTML = "<img class='icon_menu' src='../ladon_svg/time.svg'>" ;
+          break;
+          case 'basic':
+            td.innerHTML = "<img class='icon_menu' src='../ladon_svg/minus.svg'>" ;
+          break;
+          case 'warning':
+            td.innerHTML = "<img class='icon_menu' src='../ladon_svg/cancel.svg'>" ;
+          break;
+          case 'kill':
+            td.innerHTML = "<img class='icon_menu' src='../ladon_svg/target.svg'>" ;
+          break;
+
+          default:
+            td.innerHTML = "<img class='icon_menu' src='../ladon_svg/time.svg'>" ;
+          break;
+        }
+
         break;
       default:
       break;

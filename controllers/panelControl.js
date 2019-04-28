@@ -26,7 +26,36 @@ for(let i=0; i < checker.length; i++){
   });
 }
 const action_run = document.getElementById('action_run');
-action_run.addEventListener('click', () => {
+let clickRunAction;
+let intervalID ;
+let continueScript = () => {
+  for(let i = 0; i < window.ladonData.ld['data'].length; i++){
+    let ld = window.ladonData.ld['data'][i];
+    let isRestricted = !(ld.admin) ? "<< rbash | " : "";
+    if(ld.continue){
+      if(ld.selected) exec(isRestricted+ld.script_name + " " +ld.parameters,
+          (error, stdout, stderr) => {
+
+            const cnsle = document.getElementsByClassName('console');
+            if(stdout){
+            cnsle[0].innerHTML = cnsle[0].innerHTML + `<br /> ${stdout} <br />`;
+            }
+            if(stderr){
+            cnsle[0].innerHTML = cnsle[0].innerHTML + `<br /> ${stderr} <br />`;
+            }
+            if(isRestricted){
+            cnsle[0].innerHTML = cnsle[0].innerHTML + `<br /> Mode restricted <br />`;
+            }
+            cnsle[0].scrollTop = cnsle[0].scrollHeight;
+      });
+    }
+  }
+}
+intervalID = window.setInterval(() => {
+  continueScript();
+}, 2000);
+
+action_run.addEventListener('click', clickRunAction = () => {
   ipc.send('action_run', window.ladonData);
 
   function puts(error, stdout, stderr) { console.log(stdout) }
@@ -44,14 +73,11 @@ action_run.addEventListener('click', () => {
       //myConsole.log(chk_p[i].placeholder);
     }else{
     }
-    let isRestricted = !(ld.admin) ? "./pwd.sh && " : ""; 
+
+    let isRestricted = !(ld.admin) ? "<< rbash | " : "";
     if(ld.selected) exec(isRestricted+ld.script_name + " " +ld.parameters,
         (error, stdout, stderr) => {
-          /*
-          myConsole.log(stdout);
-          myConsole.log(stderr);
-          */
-          myConsole.log(`#${window.ladonData.reliquat.id}#${i}`);
+
           const cnsle = document.getElementsByClassName('console');
           if(stdout){
           cnsle[0].innerHTML = cnsle[0].innerHTML + `<br /> ${stdout} <br />`;
@@ -59,8 +85,12 @@ action_run.addEventListener('click', () => {
           if(stderr){
           cnsle[0].innerHTML = cnsle[0].innerHTML + `<br /> ${stderr} <br />`;
           }
+          if(isRestricted){
+          cnsle[0].innerHTML = cnsle[0].innerHTML + `<br /> Mode restricted <br />`;
+          }
           cnsle[0].scrollTop = cnsle[0].scrollHeight;
-        });
+    });
+
 
   }
  /*

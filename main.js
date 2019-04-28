@@ -26,7 +26,7 @@ app.on('activate', () => {
 })
 
 ipc.on('action_run', (event, argv) => {
-  console.log('Action Run ', argv.ld);
+  //console.log('Action Run ', argv.ld);
 });
 
 ipc.on('new_script',(event, argv) => {

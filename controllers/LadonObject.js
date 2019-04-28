@@ -7,7 +7,7 @@ function LadonData(data=null){
     "selected": false,
     "script_name":"nom du script",
     "parameters":"parametre du script",
-    "admin":false,
+    "admin":true,
     "continue":false,
     "status":"warning",
     "id":uuid.v1()
@@ -38,7 +38,7 @@ function LadonData(data=null){
   }
   this.add = (data) => {
     if(this.ld != null){
-      
+
     }else {
 
     }
